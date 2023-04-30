@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragments">
+
+    <fragment
+        android:id="@+id/homeFragments"
+        android:name="com.plcoding.spotifycloneyt.ui.fragments.HomeFragment"
+        android:label="HomeFragments" />
+    <fragment
+        android:id="@+id/quranFragment"
+        android:name="com.plcoding.spotifycloneyt.ui.fragments.QuranFragment"
+        android:label="QuranFragment" />
+
+<!-- we can send this action id to quranFragment from any place -->
+    <action android:id="@+id/globalActionToQuranFragment"
+        app:destination="@+id/quranFragment"/>
+</navigation>

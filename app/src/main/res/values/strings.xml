@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">القرآن الكريم</string>
+    <string name="notification_channel_name">Quran Channel</string>
+    <string name="notification_channel_description">Showing the currently playing chapter of quran</string>
+</resources>

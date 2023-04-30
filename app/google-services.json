@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "260096693712",
+    "project_id": "qur-an-d346a",
+    "storage_bucket": "qur-an-d346a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260096693712:android:199e549a1fa338f5d5d5d5",
+        "android_client_info": {
+          "package_name": "com.plcoding.spotifycloneyt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260096693712-5m2bf1sltvdtktn7rlvnrj80g9naesqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plcoding.spotifycloneyt",
+            "certificate_hash": "ca1f10afaeb9f36a134718f77ff5316a57560fd6"
+          }
+        },
+        {
+          "client_id": "260096693712-um1v3e3136du2ohaqucs5oct13bf9nvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWZTOAOfV3zBw-TQLbiSJdUdaDYSKq1xc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260096693712-um1v3e3136du2ohaqucs5oct13bf9nvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
