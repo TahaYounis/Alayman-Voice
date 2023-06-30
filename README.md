@@ -20,6 +20,6 @@ Online application offers a diverse range of audio content, including recitation
 
 •	Dagger hilt : provides a standard way to incorporate Dagger dependency injection into an Android application.
 
-•	Classes like MediaBrowserCompat, ConcatenatingMediaSource, DefaultDataSource.Factory, MediaSessionCompat, TimelineQueueNavigator
+•	Classes like MediaBrowserCompat, ConcatenatingMediaSource, DefaultDataSource.Factory, MediaSessionCompat, TimelineQueueNavigator, MediaBrowserServiceCompat
 
 •	Glide : Catch images and load them in imageView.
