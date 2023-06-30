@@ -18,19 +18,14 @@ class QuranAdapter @Inject constructor(
         // get reference to current song
         val chapterOfQuran = quran[position]
         holder.itemView.apply {
-            tvPrimary.text = chapterOfQuran.title
+            tvSongTitle.isSelected = true
+            tvSongTitle.text = chapterOfQuran.title
             tvSecondary.text = chapterOfQuran.subtitle
             glide.load(chapterOfQuran.imageUrl).into(ivItemImage)
 
             setOnClickListener{
                 onItemClickListener?.let {
                     it(chapterOfQuran)
-                    val  sharedPreferences = context.getSharedPreferences("IndexOfQuran",0)
-                    val editor = sharedPreferences.edit()
-                    editor.apply{
-                        putInt("IndexOfChapterOfQuran",position)
-                        commit()
-                    }
                 }
             }
         }

@@ -28,7 +28,7 @@ class FirebaseQuranSource @Inject constructor(
     finished downloading (so created state class), and in our service we need often need immediate result for that,
     and with onReadyListener we can schedule actions that we want perform when that music source is finished. */
 
-    // implement the list that contain media meta data compat, it can potentially hold much more meta information about the song
+        // implement the list that contain media meta data compat, it can potentially hold much more meta information about the song
     // and that the format we need our songs to be in our type of service
     var listOfQuran = emptyList<MediaMetadataCompat>()
     // fun gets all of our song objects from firebase, withContext(Dispatchers.IO) to switch our coroutine
@@ -56,10 +56,11 @@ class FirebaseQuranSource @Inject constructor(
         /* whenever we wait for quran source to finish loading the lambda fun will be called there,
         so we can continue with normal stuff that we need to do when that is loaded */
     }
+
     /* ConcatenatingMediaSource contains information for exoplayer from where it can stream that actual song
        , create concatenating music source  to list several single music sources to play song and when it finish automatically
        play the second song and so on, convert list of quran into media source object */
-    fun asMediaSource(dataSourceFactory: DefaultDataSource.Factory): ConcatenatingMediaSource{
+        fun asMediaSource(dataSourceFactory: DefaultDataSource.Factory): ConcatenatingMediaSource{
         val concatenatingMediaSource = ConcatenatingMediaSource()
         listOfQuran.forEach{ mediaMetadataCompat->
             // create single media source and add to concatenatingMediaSource
@@ -95,7 +96,7 @@ class FirebaseQuranSource @Inject constructor(
                 // we want do that in thread save way, so can also change state form multiple thread at once
                 synchronized(onReadyListeners){
                     // no other thread can access onReadyListener list at the same time
-                    field = value // field: current value of state, value: new value, so assign new state to the sate
+                    field = value // field: current value of state, value: new value, so assign new state to the state
                     onReadyListeners.forEach {listener->
                         listener(state == STATE_INITIALIZED) // if it not equal STATE_INITIALIZED then it equal STATE_ERROR
                     }

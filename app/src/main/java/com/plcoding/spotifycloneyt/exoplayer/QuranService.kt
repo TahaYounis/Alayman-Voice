@@ -8,8 +8,8 @@ import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
-import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.upstream.DefaultDataSource
@@ -34,7 +34,7 @@ class QuranService : MediaBrowserServiceCompat() {
     lateinit var dataSourceFactory: DefaultDataSource.Factory
 
     @Inject
-    lateinit var exoPlayer: ExoPlayer
+    lateinit var exoPlayer: SimpleExoPlayer
 
     @Inject
     lateinit var firebaseQuranSource: FirebaseQuranSource
@@ -55,7 +55,7 @@ class QuranService : MediaBrowserServiceCompat() {
     // coroutine scope has the properties of our main dispatcher and service job together, and that allow us define a custom service scope
     private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
 
-    /* we need to create media session because we if we play music with media browser service then we always have
+    /* we need to create media session because if we play music with media browser service then we always have
     this media session, so the current session of playing music and that contains important information about
     the media session and we can use that to communicate with service */
     private lateinit var mediaSession : MediaSessionCompat
@@ -93,7 +93,7 @@ class QuranService : MediaBrowserServiceCompat() {
             isActive = true
         }
         /* media session comes with session token that we can use it to get information about this media session
-         and since we extend from MediaBrowserServiceCompat and that class have session toke too, so we need to assign
+         and since we extend from MediaBrowserServiceCompat and that class have session token too, so we need to assign
          the token of our media session to our service*/
         sessionToken = mediaSession.sessionToken
 
@@ -109,7 +109,7 @@ class QuranService : MediaBrowserServiceCompat() {
 
         var quranPlaybackPrepare = QuranPlaybackPreparer(firebaseQuranSource){
             // we need this lambda block to get current MediaMetadataCompat object after player is prepared
-            curPlayingChapterOfQuran = it // this lambda block be called every time the player chose new song
+            curPlayingChapterOfQuran = it // this lambda block be called every time the player choose new song
             preparePlayer(
                 firebaseQuranSource.listOfQuran,
                 it,
@@ -129,9 +129,8 @@ class QuranService : MediaBrowserServiceCompat() {
     // class used to propagate information about specific song the metadata to our notification
     private inner class QuranQueueNavigator : TimelineQueueNavigator(mediaSession){
         override fun getMediaDescription(player: Player, windowIndex: Int): MediaDescriptionCompat {
-            val  sharedPreferences = applicationContext.getSharedPreferences("IndexOfQuran",0)
-            val index = sharedPreferences.getInt("IndexOfChapterOfQuran",0)
-            return firebaseQuranSource.listOfQuran[index].description
+
+            return firebaseQuranSource.listOfQuran[windowIndex].description
         }
     }
     // we want prepare our exoplayer
@@ -140,10 +139,11 @@ class QuranService : MediaBrowserServiceCompat() {
         itemToPlay: MediaMetadataCompat?, // the current song we want to play
         playNow: Boolean // if we directly play this song or not
     ){
-        // if we didn't specific we didn't chose any song then we want play the first one if not we need find song of index itemToPlay
+            // if we didn't choose any song then we want play the first one if not we need find song of index itemToPlay
         val curChapterOfQuranIndex = if(curPlayingChapterOfQuran == null) 0 else listOfQuran.indexOf(itemToPlay)
-        exoPlayer.addMediaSource(firebaseQuranSource.asMediaSource(dataSourceFactory))
-        exoPlayer.prepare()
+        exoPlayer.prepare(firebaseQuranSource.asMediaSource(dataSourceFactory))
+//        exoPlayer.addMediaSource(firebaseQuranSource.asMediaSource(dataSourceFactory))
+//        exoPlayer.prepare()
         exoPlayer.seekTo(curChapterOfQuranIndex,0L) // to make song start from begging
         // true if we want song play directly when open the app, false when we want user open th song, and we want when the app first time opened the song not play so false and after play song make it true
         exoPlayer.playWhenReady = playNow
@@ -165,7 +165,7 @@ class QuranService : MediaBrowserServiceCompat() {
 
     /* this browsable app that we can have many files like playlists or albums, and if click on that we load
     bunch of media items so media item can again be a browsable item like a playlist or a song that we can play
-    for that we need root id the id that refers the the very first media items in our case we just have
+    for that we need root id the id that refers the very first media items in our case we just have
     firebase quran source so the chapters that we get from firebase, but in more complicated app that could be
     all your playlist at once displays at first, since we use bound service that mean several clint cant connect
     to that but in our case just our activity and viewModel that means we could potentially also deny clients to

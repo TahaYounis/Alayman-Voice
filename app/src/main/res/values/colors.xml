@@ -6,4 +6,12 @@
     <color name="mediumDarkBackground">#303030</color>
     <color name="darkBackground">#202020</color>
     <color name="lightBackground">#404040</color>
+
+    <color name="bottom_navigation_color">#7f333639</color>
+    <color name="g_white_gray200">#EDEDED</color>
+    <color name="bottomNavigationIconColor">#939393</color>
+    <color name="white">#FFFFFF</color>
+
+
+
 </resources>

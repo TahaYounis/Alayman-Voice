@@ -1,12 +1,15 @@
 package com.plcoding.spotifycloneyt.ui.viewmodels
 
+import android.support.v4.media.MediaMetadataCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.plcoding.spotifycloneyt.exoplayer.QuranService
-import com.plcoding.spotifycloneyt.exoplayer.QuranServiceConnection
-import com.plcoding.spotifycloneyt.exoplayer.currentPlaybackPosition
+import com.bumptech.glide.Glide.init
+import com.plcoding.spotifycloneyt.data.entities.QuranModel
+import com.plcoding.spotifycloneyt.db.QuranDao
+import com.plcoding.spotifycloneyt.db.QuranDatabase
+import com.plcoding.spotifycloneyt.exoplayer.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuranViewModel @Inject constructor(
-    quranServiceConnection: QuranServiceConnection
+    quranServiceConnection: QuranServiceConnection,
+    private val dao: QuranDao
 ) : ViewModel(){
     /* what will be specific in songViewModel is the current position in our player because we have seek bar
     in which we observe on the current player position we get from our quranService.
@@ -22,13 +26,13 @@ class QuranViewModel @Inject constructor(
     and on the other hand we will have livedata here for the current player position for which we will write a little
     extension fun for our playback state */
 
-    private val playbackState = quranServiceConnection.playbackState
-
     private val _curQuranDuration = MutableLiveData<Long>()
     val curQuranDuration:LiveData<Long> = _curQuranDuration
 
     private val _curPlayerPosition = MutableLiveData<Long?>()
     val curPlayerPosition:LiveData<Long?> = _curPlayerPosition
+
+    private val playbackState = quranServiceConnection.playbackState
 
     init {
         updateCurrentPlayerPosition()
@@ -49,5 +53,15 @@ class QuranViewModel @Inject constructor(
                 delay(100L)
             }
         }
+    }
+
+    fun saveQuranToFavorite(quranModel: QuranModel) = viewModelScope.launch {
+        dao.upsert(quranModel)
+    }
+
+    fun getSavedQuran() = dao.getAllQuran()
+
+    fun deleteQuran(quranModel: QuranModel) = viewModelScope.launch {
+        dao.deleteQuran(quranModel)
     }
 }

@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvPrimary"
-        android:layout_width="0dp"
+        android:id="@+id/tvSongTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="8sp"
+        android:includeFontPadding="false"
         android:text="Title"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/textTitleStyle2"
+        android:textSize="12sp"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_marginEnd="8sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4sp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="artist"
+        style="@style/textBodyStyle"
+        android:textColor="#AAAAAA"
+        android:textSize="16sp"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@id/tvSongTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvSongTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

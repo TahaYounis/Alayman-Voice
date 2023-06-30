@@ -10,14 +10,12 @@ import com.plcoding.spotifycloneyt.data.entities.QuranModel
 
 /* we will try write this adapter in optimal way to saving a lot of code and minimizing boilerplate code
 because this adapter is similar, we will write abstract base adapter class that define the default behavior
-every adapter in our project should have and then we will have 2 adapter inherit from this base adapter
+every adapter in our project should have and then we will have adapters inherit from this base adapter
 and this will give them all properties functions and variables and if we want to change something then we can
 do that individually for each adapter so we can set individual layout for those */
 abstract class BaseQuranAdapter(
     private val layoutId: Int
 )  : RecyclerView.Adapter<BaseQuranAdapter.QuranViewHolder>(){
-
-
 
     class QuranViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 

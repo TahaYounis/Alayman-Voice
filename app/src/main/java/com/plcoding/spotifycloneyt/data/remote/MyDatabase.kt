@@ -25,7 +25,7 @@ class MyDatabase {
             this wait fun give us a object of type any, so this fun doesn't know yet what type of
             these object have that we get from fireStore database */
             quranCollection.get().await().toObjects(QuranModel::class.java)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             emptyList()
         }
     }

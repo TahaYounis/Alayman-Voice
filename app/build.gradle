@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.gms.google-services'
+apply plugin:  'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 33
@@ -35,6 +36,9 @@ android {
     }
     kapt {   correctErrorTypes true }
 
+//    buildFeatures{
+//        viewBinding true
+//    }
 }
 
 dependencies {
@@ -93,6 +97,7 @@ dependencies {
 
     // Firebase Firestore
     implementation 'com.google.firebase:firebase-firestore:24.4.2'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.4'
 
     // Firebase Storage KTX
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
@@ -104,4 +109,16 @@ dependencies {
     api 'com.google.android.exoplayer:exoplayer-core:2.18.2'
     api 'com.google.android.exoplayer:exoplayer-ui:2.18.2'
     api 'com.google.android.exoplayer:extension-mediasession:2.18.2'
+
+    // circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // for palettes for extracting colors
+    implementation 'androidx.palette:palette:1.0.0'
+
+    // Room
+    implementation "androidx.room:room-runtime:2.5.0"
+    kapt "androidx.room:room-compiler:2.5.0"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.5.0"
 }

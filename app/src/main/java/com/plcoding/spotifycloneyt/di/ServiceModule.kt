@@ -47,7 +47,7 @@ object ServiceModule {
         audio attributes because we gave it this manual, so it pass the instance attributes from .setContentType() - .setUsage
         as a parameters for audioAttribute below, and can simply used them */
         audioAttributes: AudioAttributes
-    )= ExoPlayer.Builder(context).build().apply {
+    )= SimpleExoPlayer.Builder(context).build().apply {
         // we used apply to set audio attributes to that exoPlayer
         setAudioAttributes(audioAttributes, true)
         setHandleAudioBecomingNoisy(true) // pause our music player for example if user plugs in his headphones

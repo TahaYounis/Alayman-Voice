@@ -1,16 +1,24 @@
 package com.plcoding.spotifycloneyt.di
 
 import android.content.Context
+import androidx.room.Room
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.plcoding.spotifycloneyt.R
 import com.plcoding.spotifycloneyt.adapters.SwipeQuranAdapter
+import com.plcoding.spotifycloneyt.data.entities.QuranModel
+import com.plcoding.spotifycloneyt.data.remote.MyDatabase
+import com.plcoding.spotifycloneyt.db.QuranDao
+import com.plcoding.spotifycloneyt.db.QuranDatabase
 import com.plcoding.spotifycloneyt.exoplayer.QuranServiceConnection
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ServiceScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -22,6 +30,7 @@ import javax.inject.Singleton
  to our whole application's lifetime so all of will be singletons and only have a single instance of these
  as long as our application lives and that's why we install that module into SingletonComponent  */
 object AppModule {
+
     // we need to till to dagger how it should create the dependencies we need
     /* provide dependency that we need to throughout the entire lifetime of our app which is Glide instance
     so our image loading library will use we will use that as a singleton with some default options that
@@ -49,4 +58,26 @@ object AppModule {
             .error(R.drawable.ic_image)
             .diskCacheStrategy(DiskCacheStrategy.DATA) // make sure our images are cached with glide
     )
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFireStoreDatabase() = Firebase.firestore
+
+
+    @Provides
+    @Singleton
+    fun provideRoomDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(
+        context, QuranDatabase::class.java, "quran_db.db")
+        .allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideDao(db: QuranDatabase) = db.getQuranDao()
+
+    @Provides
+    @Singleton
+    fun provideEntity() = QuranModel()
+
 }

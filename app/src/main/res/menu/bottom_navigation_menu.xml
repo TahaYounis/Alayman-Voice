@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeFragments"
+        android:title="Home"
+        android:icon="@drawable/home_icon_for_bottom_navigation"/>
+
+    <item android:id="@+id/searchFragment"
+        android:title="Search"
+        android:icon="@drawable/search_icon_for_bottom_navigation"/>
+
+    <item android:id="@+id/favoriteFragment"
+        android:title="Favorite"
+        android:icon="@drawable/heart_icon_for_botton_navigation"/>
+
+    <item android:id="@+id/profileFragment"
+        android:title="Profile"
+        android:icon="@drawable/profile_icon_for_botton_navigation"/>
+<!--    EDEDED-->
+</menu>

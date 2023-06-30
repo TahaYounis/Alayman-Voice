@@ -22,7 +22,7 @@ class QuranPlaybackPreparer(
         command: String,
         extras: Bundle?,
         cb: ResultReceiver?
-    ) = false // we don't need it now
+    ) = false // we don't need it now, This method is called when the media session receives a custom command. It is responsible for handling the command and preparing the media for playback if necessary.
 
     override fun getSupportedPrepareActions(): Long {
         // return the type of actions that we supported in our player
@@ -34,6 +34,7 @@ class QuranPlaybackPreparer(
 
     override fun onPrepare(playWhenReady: Boolean) = Unit // we don't need it now
 
+    // This method is called when the media session receives a request to start playback of a specific media item identified by a media ID. It is responsible for preparing the media for playback, such as loading the media file or streaming the media from a remote server.
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
         // prepare specific song the user selected to play it afterwards
         firebaseQuranSource.whenReady {

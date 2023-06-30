@@ -11,7 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.plcoding.spotifycloneyt.other.Constants.NETWORK_ERROR
 import com.plcoding.spotifycloneyt.other.Event
-import com.plcoding.spotifycloneyt.other.Resources
+import com.plcoding.spotifycloneyt.other.ResourcesForLiveData
 
 /* class take care of or sits between our activity or fragment and service, the communicator that exchange
 information from activity to service or from service to activity, make use of resource class for error handling
@@ -20,11 +20,11 @@ class QuranServiceConnection(
     context:Context
 ) {
     // implement a bunch of livedata objects that contains the information from our service, and we will observe on later on in our fragments to get these information and get updates if data in our service changes
-    private val _isConnected =MutableLiveData<Event<Resources<Boolean>>>() // livedata contain contains current state if connection between activity and quran service is active
-    val isConnected: LiveData<Event<Resources<Boolean>>> = _isConnected // livedata we observe on from outside
+    private val _isConnected =MutableLiveData<Event<ResourcesForLiveData<Boolean>>>() // livedata contain contains current state if connection between activity and quran service is active
+    val isConnected: LiveData<Event<ResourcesForLiveData<Boolean>>> = _isConnected // livedata we observe on from outside
 
-    private val _networkError =MutableLiveData<Event<Resources<Boolean>>>()
-    val networkError: LiveData<Event<Resources<Boolean>>> = _networkError
+    private val _networkError =MutableLiveData<Event<ResourcesForLiveData<Boolean>>>()
+    val networkError: LiveData<Event<ResourcesForLiveData<Boolean>>> = _networkError
 
     private val _playbackState =MutableLiveData<PlaybackStateCompat?>() // whether the player is currently playing or paused
     val playbackState: LiveData<PlaybackStateCompat?> = _playbackState
@@ -72,18 +72,18 @@ class QuranServiceConnection(
                     registerCallback(MediaControllerCallback())
                 }
                 // post connection status to our _isConnected live data
-                _isConnected.postValue(Event(Resources.success(true)))
+                _isConnected.postValue(Event(ResourcesForLiveData.success(true)))
             }
 
             override fun onConnectionSuspended() {
                 _isConnected.postValue(
-                    Event(Resources.error(
+                    Event(ResourcesForLiveData.error(
                     "The connection was suspended", false
                 )))
             }
         override fun onConnectionFailed() {
             _isConnected.postValue(
-                Event(Resources.error(
+                Event(ResourcesForLiveData.error(
                 "Couldn't connect to media browser", false
             )
                 )
@@ -109,7 +109,7 @@ class QuranServiceConnection(
                 //if we send such a session event here we want to use our network error livedata
                 NETWORK_ERROR -> _networkError.postValue(
                     Event(
-                        Resources.error(
+                        ResourcesForLiveData.error(
                             // post error resource here if we catch this network error
                             "Please check your internet connection",
                             null

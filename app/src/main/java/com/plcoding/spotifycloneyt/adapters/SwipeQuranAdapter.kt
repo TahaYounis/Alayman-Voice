@@ -13,8 +13,9 @@ class SwipeQuranAdapter: BaseQuranAdapter(R.layout.swipe_item){
         // get reference to current song
         val quran = quran[position]
         holder.itemView.apply {
-            val text = "${quran.title} - ${quran.subtitle}"
-            tvPrimary.text = text
+            tvSongTitle.isSelected = true
+            tvSongTitle.text = quran.title
+            tvArtist.text = quran.subtitle
             setOnClickListener{
                 onItemClickListener?.let { click ->
                     click(quran)

@@ -10,11 +10,12 @@
         android:id="@+id/ivItemImage"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvPrimary"
+        android:id="@+id/tvSongTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -22,7 +23,11 @@
         android:gravity="center|right"
         android:text="اسم الصورة"
         android:layout_marginTop="8dp"
-        android:textSize="20sp"
+        android:textSize="16sp"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        style="@style/textTitleStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivItemImage"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,10 +37,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="تفاصيل"
-        android:textSize="14sp"
+        android:textSize="16sp"
+        style="@style/textBodyStyle"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layout_constraintStart_toEndOf="@+id/ivItemImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvPrimary" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSongTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
