@@ -3,8 +3,6 @@ You can listen to the reading of the Qur’an, and there is in the application t
 
 https://github.com/TahaYounis/Alayman-Voice/assets/82248336/92716baa-bc3f-45cb-b529-08610dd40e52
 
-![Screenshot_2023-05-03-01-10-26-09_ada1b057f08e0a2339403806ce512ef6_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/82248336/236012679-5cbff906-9526-4152-b63b-0045a2e1fd26.jpg)
-
 ## Libraries and technologies used
 
 •	ExoPlayer : for playing audio and video both locally and over the Internet.
