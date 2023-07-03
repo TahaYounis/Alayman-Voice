@@ -1,4 +1,4 @@
-# Listen-Quran
+# Alayman-Voice
 Online application offers a diverse range of audio content, including recitations of the Qur'an, hadiths, dhikr, chants, and more, with different reciters' voices. You can easily search through the entire collection, mark your favorite tracks for quick access, and enjoy the added convenience of background playback. With this handy feature, you can continue to listen to your favorite content even while using other apps on your device.
 
 # App Video
